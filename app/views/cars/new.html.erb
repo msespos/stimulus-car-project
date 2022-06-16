@@ -1,0 +1,15 @@
+Make a car with three variants:
+<%= form_with model: @car do |f| %>
+  Name
+  <%= f.text_field :name %><br><br>
+  Variants:<br><br>
+  <%= f.fields_for :variants do |variants_form| %>
+    <%= variants_form.label :color %>
+    <%= variants_form.text_field :color %><br>
+    <%= variants_form.label :seats %>
+    <%= variants_form.text_field :seats %><br>
+    <%= variants_form.label :tape %>
+    <%= variants_form.check_box :tape %><br><br>
+  <% end %>
+  <%= f.submit 'Make it!', class: "button" %>
+<% end %>
