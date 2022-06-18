@@ -1,12 +1,17 @@
 class CarsController < ApplicationController
+  def index
+    #START HERE
+  end
+
   def new
     @car = Car.new
+    # THIS NEEDS TO BE REMOVED ONCE VARIANTS ARE DYNAMICALLY ADDED
     3.times { @car.variants.build }
   end
 
+  # THIS MAY BE MOVED TO UPDATE, FOR UPDATING VARIANTS, NOT CARS
   def create
     @car = Car.new(car_params)
-    Rails.logger.debug "CAR PARAMS = #{car_params}"
     if @car.save
       redirect_to @car
     else
