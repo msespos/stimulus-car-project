@@ -4,7 +4,6 @@ class CarsController < ApplicationController
 
   def edit
     @car = Car.find(params[:car_id])
-    3.times { @car.variants.build }
   end
 
   def update
@@ -23,6 +22,6 @@ class CarsController < ApplicationController
   private
 
     def car_params
-      params.require(:car).permit(:name, variants_attributes: [:color, :seats, :tape])
+      params.require(:car).permit(:name, variants_attributes: [:id, :color, :seats, :tape])
     end
 end
