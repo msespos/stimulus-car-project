@@ -1,0 +1,12 @@
+Your Car<br>
+<%= @car.name %><br><br>
+Variants:<br><br>
+<% @car.variants.each do |v| %>
+Variant #<%= v.id %>:<br>
+Color:
+<%= v.color %><br>
+Seats:
+<%= v.seats %><br>
+Tape?
+<%= v.tape %><br><br>
+<% end %>
