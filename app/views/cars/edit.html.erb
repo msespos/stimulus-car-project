@@ -1,16 +1,19 @@
-<%# THIS NEEDS TO BE REWRITTEN TO DYNAMICALLY ADD VARIANT FIELDS %>
-Make a car with three variants:
-<%= form_with model: @car, method: :patch, local: true do |car_form| %>
-  Name
-  <%= car_form.text_field :name %><br><br>
-  Variants:<br><br>
-  <%= car_form.fields_for :variants do |variants_form| %>
-    <%= variants_form.label :color %>
-    <%= variants_form.text_field :color %><br>
-    <%= variants_form.label :seats %>
-    <%= variants_form.text_field :seats %><br>
-    <%= variants_form.label :tape %>
-    <%= variants_form.check_box :tape %><br><br>
+<%= @car.name %><br><br>
+<%= form_with model: @car, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' } do |f| %>
+  <template data-nested-form-target="template">
+    <%= f.fields_for :variants, Variant.new, child_index: 'NEW_RECORD' do |variant_fields| %>
+      <%= render "variant_form", f: variant_fields %>
+    <% end %>
+  </template>
+
+  <%= f.fields_for :variants do |variant_fields| %>
+    <%= render "variant_form", f: variant_fields %>
   <% end %>
-  <%= car_form.submit 'Make it!', class: "button" %>
+
+  <!-- Inserted elements will be injected before that target. -->
+  <div data-nested-form-target="target"></div>
+
+  <button type="button" data-action="nested-form#add">Add variant</button>
+
+  <%= f.submit 'Save variants' %>
 <% end %>
