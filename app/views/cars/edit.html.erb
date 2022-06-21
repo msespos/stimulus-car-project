@@ -1,6 +1,6 @@
-<%# THIS NEEDS TO BE REWRITTEN TO TAKE A CAR AND DYNAMICALLY ADD VARIANT FIELDS %>
+<%# THIS NEEDS TO BE REWRITTEN TO DYNAMICALLY ADD VARIANT FIELDS %>
 Make a car with three variants:
-<%= form_with model: @car do |car_form| %>
+<%= form_with model: @car, method: :patch, local: true do |car_form| %>
   Name
   <%= car_form.text_field :name %><br><br>
   Variants:<br><br>
