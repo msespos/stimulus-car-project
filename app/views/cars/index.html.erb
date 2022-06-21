@@ -1,4 +1,4 @@
-<%= form_with model: @car do |f| %>
+<%= form_with url: '/cars/id/edit', method: 'get' do |f| %>
   Select a car:<br>
   <%= f.collection_radio_buttons(:car_id, Car.order(:name), :id, :name) do |b| %>
     <%= b.label { b.radio_button + b.text } %><br>
