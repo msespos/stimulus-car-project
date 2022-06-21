@@ -1,18 +1,15 @@
 class CarsController < ApplicationController
   def index
-    #START HERE
   end
 
-  def new
-    @car = Car.new
-    # THIS NEEDS TO BE REMOVED ONCE VARIANTS ARE DYNAMICALLY ADDED
+  def edit
+    @car = Car.find(params[:car_id])
     3.times { @car.variants.build }
   end
 
-  # THIS MAY BE MOVED TO UPDATE, FOR UPDATING VARIANTS, NOT CARS
-  def create
-    @car = Car.new(car_params)
-    if @car.save
+  def update
+    @car = Car.find(params[:id])
+    if @car.update(car_params)
       redirect_to @car
     else
       render "new"
