@@ -4,13 +4,13 @@ class CarsController < ApplicationController
   end
 
   def update
+    params["car"] ||= { variants_attributes: [] }
     @car = Car.find(params[:id])
-    @car.variants.delete_all
     if @car.update(car_params)
       redirect_to @car
     else
       flash[:alert] = "DIDN'T UPDATE"
-      render "new"
+      render "show"
     end
   end
 
