@@ -4,7 +4,7 @@ class CarsController < ApplicationController
   end
 
   def update
-    params["car"] ||= { variants_attributes: [] }
+    params[:car] ||= { variants_attributes: [] }
     @car = Car.find(params[:id])
     if @car.update(car_params)
       redirect_to @car
@@ -21,6 +21,7 @@ class CarsController < ApplicationController
   private
 
     def car_params
-      params.require(:car).permit(:name, variants_attributes: [:color, :seats, :tape])
+      params.require(:car)
+            .permit(:name, variants_attributes: [:id, :_destroy, :color, :seats, :tape])
     end
 end
